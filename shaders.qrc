@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>vshader.glsl</file>
+        <file>vbackground.glsl</file>
+        <file>fbackground.glsl</file>
+        <file>fshader.glsl</file>
+        <file>mesh_wireframe.glsl</file>
+        <file>vcolored_lines.glsl</file>
+        <file>fcolored_lines.glsl</file>
+    </qresource>
+</RCC>
