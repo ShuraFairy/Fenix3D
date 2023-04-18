@@ -4,7 +4,7 @@
 #include <QVector2D>
 #include <QVector3D>
 #include <QVector>
-#include <QTimer>
+//#include <QTimer>
 #include <vector>
 
 #define aisgl_min(x, y) (x < y ? x : y)
@@ -124,7 +124,7 @@ void Model::draw(QOpenGLShaderProgram *program, QOpenGLFunctions *functions)
     for(unsigned int i = 0; i < meshes.size(); i++)
         meshes[i].draw(program, functions);
 
-    qDebug() << "end draw model";
+    qDebug() << "end draw model";    
 }
 
 void Model::exportModel()

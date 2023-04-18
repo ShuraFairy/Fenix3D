@@ -62,7 +62,7 @@ Window::Window(MainWindow *mw)
     setLayout(mainLayout);
 
     setWindowTitle(tr("Fenix3D"));
-    glWidget->set_drawMode(DrawMode::normal);    
+    glWidget->set_drawMode(normal);
 
     timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(slotTimer()));
@@ -97,12 +97,12 @@ void Window::OnButtonDrawModeClicked()
 {
     if(drawMode == true)
     {
-        glWidget->set_drawMode(DrawMode::wireframe);
+        glWidget->set_drawMode(wireframe);
         drawMode = false;
     }
     else
     {
-        glWidget->set_drawMode(DrawMode::normal);
+        glWidget->set_drawMode(normal);
         drawMode = true;
     }
 }

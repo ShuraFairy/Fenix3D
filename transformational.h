@@ -1,22 +1,23 @@
 #ifndef TRANSFORMATIONAL_H
 #define TRANSFORMATIONAL_H
 
-#include <QOpenGLFunctions>
-#include <QtOpenGL/QtOpenGL>
-#include <QOpenGLShaderProgram>
-#include <QOpenGLFunctions_3_1>
-#include <QOpenGLFunctions_4_5_Core>
-#include <QOpenGLContext>
-#include <QOpenGLShaderProgram>
-#include <QOpenGLBuffer>
-#include <QOpenGLTexture>
-#include <QMatrix4x4>
-#include <QVector2D>
-//class QQuaternion;
-//class QVector3D;
-//class QMatrix4x4;
-//class QOpenGLShaderProgram;
-//class QOpenGLFunctions;
+//#include <QOpenGLFunctions>
+//#include <QtOpenGL/QtOpenGL>
+//#include <QOpenGLShaderProgram>
+//#include <QOpenGLFunctions_3_1>
+//#include <QOpenGLFunctions_4_5_Core>
+//#include <QOpenGLContext>
+//#include <QOpenGLShaderProgram>
+//#include <QOpenGLBuffer>
+//#include <QOpenGLTexture>
+//#include <QMatrix4x4>
+//#include <QVector2D>
+
+class QQuaternion;
+class QVector3D;
+class QMatrix4x4;
+class QOpenGLShaderProgram;
+class QOpenGLFunctions;
 
 class Transformational
 {

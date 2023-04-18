@@ -18,4 +18,6 @@ void main(void)
 
     if(u_drawMode == true)
         gl_FragColor = mix( c0, c1, v_textcoord.y );
+    else
+        gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
 }

@@ -14,7 +14,7 @@ void Camera3D::draw(QOpenGLShaderProgram *program, QOpenGLShaderProgram *program
     udateViewMatrix();
 
     program->setUniformValue("u_viewMatrix", m_viewMatrix);
-    programAxis->setUniformValue("view_matrix", m_viewMatrix);
+    //programAxis->setUniformValue("view_matrix", m_viewMatrix);
 }
 
 void Camera3D::rotate(const QQuaternion &r)

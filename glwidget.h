@@ -2,23 +2,23 @@
 #define GLWIDGET_H
 
 #include <QOpenGLWidget>
-#include <QOpenGLFunctions_4_0_Core>
+#include <QOpenGLFunctions_4_3_Core>
 #include <QOpenGLBuffer>
 #include <QOpenGLTexture>
 #include <QMatrix4x4>
-#include <QThread>
-#include <memory>
+#include <QMdiArea>
 
 #include "geometryengine.h"
 #include "loader.h"
 
+class Transformational;
 class Background;
 class Camera3D;
 class Axis;
 
-enum class DrawMode {normal, shaded, wireframe, surfaceangle, DRAWMODECOUNT};
+enum DrawMode {normal, shaded, wireframe, surfaceangle, DRAWMODECOUNT};
 
-class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions_4_0_Core
+class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions_4_3_Core
 {
     Q_OBJECT
 
@@ -81,7 +81,7 @@ private:
     Background * m_back;    
     Camera3D * m_camera;
     Axis* m_axis;
-    enum class DrawMode drawMode;
+    enum DrawMode drawMode;
     bool drawAxes = true;
 };
 

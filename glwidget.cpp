@@ -1,6 +1,9 @@
 #include "glwidget.h"
+
 #include <QMouseEvent>
+#include <QOpenGLShaderProgram>
 #include <QOpenGLContext>
+#include <QThread>
 
 #include <assimp/scene.h>
 #include <assimp/Importer.hpp>
@@ -17,8 +20,8 @@ GLWidget::GLWidget(QWidget *parent)
 {
     m_camera = new Camera3D;    
     m_camera->translate(QVector3D(0.0f, 0.0f, -2.0f));
-    currentTransform = QMatrix4x4();
-    resetTransform();
+//    currentTransform = QMatrix4x4();
+//    resetTransform();
 }
 
 GLWidget::~GLWidget()
@@ -81,13 +84,13 @@ void GLWidget::paintGL()
     QOpenGLShaderProgram* selected_mesh_shader = nullptr;
 
     bool mode = true;
-    if(drawMode == DrawMode::wireframe)
+    if(drawMode == wireframe)
     {
         mode = false;
         selected_mesh_shader = &m_programWireframeShader;
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     }
-    else if(drawMode == DrawMode::normal)
+    else if(drawMode == normal)
     {
         mode = true;
         selected_mesh_shader = &m_program;

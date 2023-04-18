@@ -4,12 +4,12 @@
 #include "transformational.h"
 
 #include <QOpenGLFunctions>
-#include <QtOpenGL/QtOpenGL>
+//#include <QtOpenGL/QtOpenGL>
 #include <QOpenGLShaderProgram>
-#include <QOpenGLFunctions_3_1>
-#include <QOpenGLFunctions_4_5_Core>
-#include <QOpenGLContext>
-#include <QOpenGLShaderProgram>
+//#include <QOpenGLFunctions_3_1>
+//#include <QOpenGLFunctions_4_5_Core>
+//include <QOpenGLContext>
+//#include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
 #include <QOpenGLTexture>
 #include <QMatrix4x4>
@@ -17,7 +17,7 @@
 
 class Object3D;
 
-class Background : public Transformational, protected QOpenGLFunctions_3_1
+class Background : public Transformational//, protected QOpenGLFunctions_3_1
 {
 public:
     Background(float width);
