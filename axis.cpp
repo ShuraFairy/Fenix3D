@@ -144,7 +144,9 @@ void Axis::draw(QOpenGLShaderProgram *programAxis, QOpenGLFunctions*functions,
     loadAttribPtr();
     glDrawArrays(GL_LINES, 0, 3 * 6);
     flowerAxisVertices.release();
-    for(int aIdx = 0; aIdx < 3; aIdx++){
+
+    for(int aIdx = 0; aIdx < 3; ++aIdx)
+    {
         QVector3D transVec = QVector3D();
         transVec[aIdx] = 1.25;//This is how far we want the letters to be extended out
         QOpenGLBuffer b = flowerLabelVertices[aIdx];
@@ -157,7 +159,7 @@ void Axis::draw(QOpenGLShaderProgram *programAxis, QOpenGLFunctions*functions,
         b.bind();
         loadMatrixUniforms(labelTransMat, aspectMat * hudMat);
         loadAttribPtr();
-        glDrawArrays(GL_LINES, 0, axisSegCount[aIdx]*2*6);
+        glDrawArrays(GL_LINES, 0, axisSegCount[aIdx] * 2 * 6);
         b.release();
     }
     //shader.release();*
