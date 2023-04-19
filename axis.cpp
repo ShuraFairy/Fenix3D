@@ -1,4 +1,5 @@
 #include "axis.h"
+#include <QMatrix4x4>
 
 const float xLet[] = {
     -0.1, -0.2, 0,
@@ -33,26 +34,26 @@ Axis::Axis()
 //    shader.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/fcolored_lines.glsl");
 //    shader.link();
     const int ptSize = 6 * sizeof(float);
-    for(int lIdx = 0; lIdx < 3; lIdx++)
+    for(int lIdx = 0; lIdx < 3; ++lIdx)
     {
         const float* l = axisLabels[lIdx];
-        const int ptCount = axisSegCount[lIdx]*2;
+        const int ptCount = axisSegCount[lIdx] * 2;
         float c[3] = {0.0};
-        c[lIdx] = 1.0;//set color
+        c[lIdx] = 1.0;  // set color
         QOpenGLBuffer b = flowerLabelVertices[lIdx];
         b.create();
         b.bind();
         b.allocate(ptCount*ptSize);
-        for(int pIdx = 0; pIdx < ptCount; pIdx++)
+        for(int pIdx = 0; pIdx < ptCount; ++pIdx)
         {
-            b.write(pIdx * ptSize, &(l[pIdx * 3]), ptSize / 2);//write coords
-            b.write(pIdx * ptSize + ptSize / 2, c, ptSize / 2);//write color
+            b.write(pIdx * ptSize, &(l[pIdx * 3]), ptSize / 2); //w rite coords
+            b.write(pIdx * ptSize + ptSize / 2, c, ptSize / 2); // write color
         }
         b.release();
     }
     // Axis buffer: 6 floats per vertex, 2 vert per line, 3 lines
     float aBuf[6 * 2 * 3] = {0.0};
-    for(int aIdx = 0; aIdx < 3; aIdx++)
+    for(int aIdx = 0; aIdx < 3; ++aIdx)
     {
         aBuf[(2 * aIdx) * 6 + 3 + aIdx] = 1.0;      //Set color (last 3 floats)
         aBuf[(2 * aIdx + 1) * 6 + 3 + aIdx] = 1.0;  //Set color (last 3 floats)
@@ -107,6 +108,9 @@ void Axis::draw(QOpenGLShaderProgram *programAxis, QOpenGLFunctions*functions,
     };
     const GLuint vp = programAxis->attributeLocation("vertex_position");
     const GLuint vc = programAxis->attributeLocation("vertex_color");
+    qDebug() << "vp: " << vp;
+    qDebug() << "vc: " << vc;
+
     glEnableVertexAttribArray(vp);
     glEnableVertexAttribArray(vc);
     auto loadAttribPtr = [&]()
@@ -136,23 +140,26 @@ void Axis::draw(QOpenGLShaderProgram *programAxis, QOpenGLFunctions*functions,
     }
     //Scale the hud to be small
     hudMat.scale(hudSize, hudSize, 1);
-//    loadMatrixUniforms(orientMat, aspectMat * hudMat);
-//    loadAttribPtr();
-//    glDrawArrays(GL_LINES, 0, 3 * 6);
-//    flowerAxisVertices.release();
-//    for(int aIdx = 0; aIdx < 3; aIdx++){
-//        QVector3D transVec = QVector3D();
-//        transVec[aIdx] = 1.25;//This is how far we want the letters to be extended out
-//        QOpenGLBuffer b = flowerLabelVertices[aIdx];
-//        //The only transform we want is to translate the letters to the ends of the axis lines
-//        QMatrix4x4 labelTransMat = QMatrix4x4();
-//        labelTransMat.translate(orientMat * transVec);
-//        b.bind();
-//        loadMatrixUniforms(labelTransMat, aspectMat * hudMat);
-//        loadAttribPtr();
-//        glDrawArrays(GL_LINES, 0, axisSegCount[aIdx]*2*6);
-//        b.release();
-//    }
+    loadMatrixUniforms(orientMat, aspectMat * hudMat);
+    loadAttribPtr();
+    glDrawArrays(GL_LINES, 0, 3 * 6);
+    flowerAxisVertices.release();
+    for(int aIdx = 0; aIdx < 3; aIdx++){
+        QVector3D transVec = QVector3D();
+        transVec[aIdx] = 1.25;//This is how far we want the letters to be extended out
+        QOpenGLBuffer b = flowerLabelVertices[aIdx];
+
+        //The only transform we want is to translate the letters to the ends of the axis lines
+        QMatrix4x4 labelTransMat = QMatrix4x4();
+
+        //labelTransMat.translate(orientMat * transVec);
+        labelTransMat.translate(orientMat.map(transVec));
+        b.bind();
+        loadMatrixUniforms(labelTransMat, aspectMat * hudMat);
+        loadAttribPtr();
+        glDrawArrays(GL_LINES, 0, axisSegCount[aIdx]*2*6);
+        b.release();
+    }
     //shader.release();*
 }
 
